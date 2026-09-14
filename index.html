@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>App Store CE Playbook</title>
+<style>
+  :root{
+    --navy:#0b1f3a; --blue:#0071e3; --lightblue:#eaf3ff; --green:#1a8f4c; --lightgreen:#e8f8ee;
+    --red:#d0353a; --lightred:#fdeaea; --orange:#c9720b; --lightorange:#fff3e2;
+    --purple:#6b3fa0; --lightpurple:#f2eaf8; --gray:#5f6672; --line:#e4e7ec; --bg:#f7f8fa;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--bg);color:#1d2129;line-height:1.45;}
+  header{background:var(--navy);color:#fff;padding:28px 32px 22px;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.15);}
+  header h1{margin:0 0 4px;font-size:26px;letter-spacing:.2px;}
+  header p{margin:0;color:#b9c6de;font-size:13px;}
+  nav{background:#fff;border-bottom:1px solid var(--line);padding:10px 32px;position:sticky;top:86px;z-index:49;overflow-x:auto;white-space:nowrap;}
+  nav a{display:inline-block;margin-right:6px;padding:6px 12px;border-radius:20px;background:var(--bg);color:var(--navy);text-decoration:none;font-size:12.5px;font-weight:600;border:1px solid var(--line);}
+  nav a:hover{background:var(--lightblue);border-color:var(--blue);}
+  main{max-width:1180px;margin:0 auto;padding:28px 24px 80px;}
+  section{margin-bottom:34px;}
+  h2{font-size:19px;margin:0 0 4px;color:var(--navy);display:flex;align-items:center;gap:8px;}
+  h2 .tag{font-size:10.5px;background:var(--navy);color:#fff;padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:.3px;}
+  .subhead{color:var(--gray);font-size:13px;margin:0 0 14px;}
+  .grid{display:grid;gap:14px;}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  @media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+  .card h3{margin:0 0 8px;font-size:14.5px;color:var(--navy);}
+  .card ul{margin:0;padding-left:18px;font-size:13px;}
+  .card li{margin-bottom:4px;}
+  .stat{background:linear-gradient(135deg,var(--blue),#003c82);color:#fff;border-radius:12px;padding:18px;text-align:center;}
+  .stat .num{font-size:26px;font-weight:700;display:block;}
+  .stat .lbl{font-size:12px;opacity:.9;}
+  table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  th{background:var(--navy);color:#fff;text-align:left;padding:9px 12px;font-size:12px;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:#fbfcfe;}
+  .pill{display:inline-block;padding:2px 9px;border-radius:12px;font-size:11px;font-weight:700;margin-right:4px;}
+  .pill.safety{background:var(--lightred);color:var(--red);}
+  .pill.performance{background:var(--lightorange);color:var(--orange);}
+  .pill.business{background:var(--lightgreen);color:var(--green);}
+  .pill.design{background:var(--lightpurple);color:var(--purple);}
+  .pill.legal{background:var(--lightblue);color:var(--blue);}
+  details{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:0;}
+  details summary{cursor:pointer;padding:12px 16px;font-weight:600;font-size:14px;color:var(--navy);list-style:none;display:flex;align-items:center;gap:10px;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary:before{content:"▸";color:var(--blue);transition:.15s;font-size:11px;}
+  details[open] summary:before{content:"▾";}
+  details .body{padding:0 16px 14px 16px;font-size:13px;}
+  details .body ul{margin:6px 0;padding-left:18px;}
+  .flag{background:var(--lightred);border-left:4px solid var(--red);padding:8px 12px;border-radius:6px;font-size:12.5px;margin-top:6px;}
+  .flag b{color:var(--red);}
+  .link-grid a{display:block;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12.5px;color:var(--blue);text-decoration:none;margin-bottom:6px;}
+  .link-grid a:hover{background:var(--lightblue);}
+  .note{font-size:11.5px;color:var(--gray);margin-top:8px;}
+  .kpi-badge{display:inline-block;background:var(--lightblue);color:var(--blue);padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:600;margin:2px 4px 0 0;}
+  .editable-hint{background:#fffbe6;border:1px dashed #e0b800;color:#8a6d00;font-size:11.5px;padding:8px 14px;border-radius:8px;margin-bottom:20px;}
+  footer{text-align:center;color:var(--gray);font-size:12px;padding:20px 0 40px;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:900px){.two-col{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📱 App Store CE Playbook</h1>
+  <p>Business Development reference — monetization, retention, discovery & App Review essentials for managing large developers · Ferdi Stöhr</p>
+</header>
+
+<nav>
+  <a href="#glance">At a Glance</a>
+  <a href="#platform">Platform Capabilities</a>
+  <a href="#monetization">Monetization</a>
+  <a href="#trials">Free Trial Benchmarks</a>
+  <a href="#offertypes">Offer Types</a>
+  <a href="#commissions">Commissions</a>
+  <a href="#priceincrease">Price Increase</a>
+  <a href="#retention">Retention</a>
+  <a href="#ppo">PPO & CPP</a>
+  <a href="#eu">EU Payments</a>
+  <a href="#analytics">Analytics & KPIs</a>
+  <a href="#design">Design Principles</a>
+  <a href="#review">Review Guidelines</a>
+  <a href="#docs">Docs & Escalation</a>
+</nav>
+
+<main>
+
+<div class="editable-hint">✏️ This is a plain HTML/CSS file — open it in any editor (or ask me) to tweak text, add rows, or re-color sections. Everything is grouped in clearly named &lt;section&gt; blocks below.</div>
+
+<!-- AT A GLANCE -->
+<section id="glance">
+  <h2>State of the App Store <span class="tag">AT A GLANCE</span></h2>
+  <div class="grid grid-4">
+    <div class="stat"><span class="num">650M+</span><span class="lbl">Weekly visitors</span></div>
+    <div class="stat"><span class="num">1bn+</span><span class="lbl">Active subscriptions</span></div>
+    <div class="stat"><span class="num">60%</span><span class="lbl">Paid subs starting with an intro offer</span></div>
+    <div class="stat"><span class="num">80M</span><span class="lbl">Subscriptions recovered via Billing Grace Period</span></div>
+  </div>
+</section>
+
+<!-- PLATFORM CAPABILITIES -->
+<section id="platform">
+  <h2>Platform Capabilities <span class="tag">WHAT THE APP STORE PROVIDES</span></h2>
+  <p class="subhead">The built-in infrastructure every developer gets by selling through the App Store — useful when pitching "why build on IAP" conversations.</p>
+  <div class="grid grid-4">
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">🧩</div><h3>Business model flexibility</h3></div>
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">🔐</div><h3>Seamless checkout with biometric authentication</h3></div>
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">💳</div><h3>200+ payment methods</h3></div>
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">🏦</div><h3>Foreign currency & global tax handled</h3></div>
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">📊</div><h3>Monetization analytics</h3></div>
+    <div class="card" style="text-align:center;background:linear-gradient(135deg,var(--blue),#003c82);color:#fff;"><div style="font-size:28px;">🅰️</div><h3 style="color:#fff;">Apple In-App Purchase</h3></div>
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">🛡️</div><h3>Fraud protection & chargeback representment</h3></div>
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">🧑‍🤝‍🧑</div><h3>Global customer support (powered by AppleCare)</h3></div>
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">📣</div><h3>Marketing & engagement features</h3></div>
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">🔄</div><h3>Subscription & churn management tools</h3></div>
+    <div class="card" style="text-align:center;"><div style="font-size:28px;">🛠️</div><h3>Pricing tools</h3></div>
+  </div>
+</section>
+
+<!-- MONETIZATION -->
+<section id="monetization">
+  <h2>Monetization Playbook <span class="tag">OFFERS & GROWTH</span></h2>
+  <p class="subhead">What a developer can offer, and the levers available to grow subscriptions.</p>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>💳 Offer Types</h3>
+      <ul><li>Free</li><li>Pay up front</li><li>Pay as you go</li></ul>
+      <h3 style="margin-top:12px;">Onboarding Levers</h3>
+      <ul><li>Free trial timeline</li><li>Personalized message (e.g. "are you a pro?")</li><li>Longer subscription durations</li></ul>
+    </div>
+
+    <div class="card">
+      <h3>🎫 Offer Codes — Config & Limits</h3>
+      <ul>
+        <li>Up to <b>10 active offers</b> per SKU</li>
+        <li>Batches of <b>500 – 25,000</b> codes</li>
+        <li>Up to <b>150,000 per app, per quarter</b></li>
+        <li>Max expiration: <b>6 months</b></li>
+      </ul>
+      <h3 style="margin-top:12px;">Use Cases</h3>
+      <ul><li>Digital marketing (email → deeplink)</li><li>Alongside physical goods/services</li><li>Physical retail / events</li><li>3rd-party partnerships</li><li>Customer service saves</li></ul>
+    </div>
+
+    <div class="card">
+      <h3>📊 Measuring Offer Performance <span class="note">(Sales & Trends)</span></h3>
+      <ul>
+        <li>Paid subscribers acquired via offer codes</li>
+        <li>Offer code → standard price conversion rate</li>
+        <li>Top performing offer codes</li>
+      </ul>
+      <div class="flag"><b>Watch:</b> Member referral codes may be ineligible if the user already claimed an intro offer.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE TRIAL BENCHMARKS -->
+<section id="trials">
+  <h2>Common Free Trial Lengths <span class="tag">BENCHMARKS</span></h2>
+  <p class="subhead">Typical trial duration by category and by region — useful when a developer asks "what's normal for my app type/market?"</p>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>📅 Monthly Trial</h3>
+      <ul><li>Entertainment</li><li>Social</li><li>Books</li><li>Music</li></ul>
+    </div>
+    <div class="card">
+      <h3>📅 Weekly Trial</h3>
+      <ul><li>Health & Fitness</li><li>Productivity</li><li>Education</li><li>Weather</li></ul>
+    </div>
+    <div class="card">
+      <h3>📅 3-Day Trial</h3>
+      <ul><li>Photo & Video</li><li>Games</li><li>Utilities</li><li>Business</li></ul>
+    </div>
+  </div>
+
+  <div class="grid grid-3" style="margin-top:14px;">
+    <div class="card">
+      <h3>🌍 Regions favoring Monthly</h3>
+      <ul><li>United States</li><li>Canada</li><li>Europe</li><li>Australia</li><li>New Zealand</li></ul>
+    </div>
+    <div class="card">
+      <h3>🌍 Regions favoring Weekly</h3>
+      <ul><li>Greater China</li><li>Japan</li><li>Latin America</li></ul>
+    </div>
+    <div class="card">
+      <h3>🌍 Regions favoring 3-day</h3>
+      <ul><li>South East Asia</li><li>Pan EMEIA</li></ul>
+    </div>
+  </div>
+  <p class="note">Use as a starting benchmark, not a rule — always validate against the developer's own category/region performance in Sales & Trends.</p>
+</section>
+
+<!-- OFFER TYPES COMPARISON -->
+<section id="offertypes">
+  <h2>Introductory vs. Promotional Offers vs. Offer Codes <span class="tag">COMPARISON</span></h2>
+  <p class="subhead">The three acquisition/retention levers side by side — know which one to recommend for which goal.</p>
+  <table>
+    <tr><th></th><th>⭐ Introductory Offers</th><th>🔁 Promotional Offers</th><th>📣 Offer Codes</th></tr>
+    <tr><td><b>Primary Use</b></td><td>Acquiring new subscribers</td><td>Retaining and winning back</td><td>Acquiring, retaining, and winning back</td></tr>
+    <tr><td><b>Distribution</b></td><td>In-app</td><td>In-app</td><td>Online and offline marketing channels</td></tr>
+    <tr><td><b>Offer Limits</b></td><td>1 per subscriber, per territory</td><td>10 active offers per subscription</td><td>10 active offers per subscription (150K codes per quarter)</td></tr>
+    <tr><td><b>Redemption Limits</b></td><td>1 per subscriber, per subscription group</td><td>Unlimited, based on eligibility logic</td><td>1 code per active offer</td></tr>
+  </table>
+</section>
+
+<!-- RETENTION -->
+<section id="retention">
+  <h2>Retention Toolkit <span class="tag">KEEP SUBSCRIBERS</span></h2>
+  <p class="subhead">Apple-automated protections vs. what the developer must actively configure.</p>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>🤖 Automatic (Apple-side)</h3>
+      <ul>
+        <li><b>Billing retry</b> → 60-day recovery window</li>
+        <li>Billing problem message shown to user</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🛠️ Developer-Adopted</h3>
+      <ul>
+        <li><b>Billing Grace Period</b> — up to 28 days; user keeps access & billing cycle while Apple resolves payment</li>
+        <li><b>Subscription offers</b> — see states below</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <h3>⏱️ Billing Recovery Timeline</h3>
+    <p class="note" style="margin-top:0;">What happens after a renewal fails — Grace Period runs first, then Billing Retry continues working in the background.</p>
+    <div style="display:flex;align-items:stretch;gap:2px;margin-top:10px;font-size:12px;text-align:center;">
+      <div style="flex:1;background:var(--blue);color:#fff;padding:14px 4px;border-radius:6px 0 0 6px;">Month 1<br><span style="font-size:10.5px;opacity:.85;">paid service</span></div>
+      <div style="flex:1;background:var(--blue);color:#fff;padding:14px 4px;">Month 2<br><span style="font-size:10.5px;opacity:.85;">renewal fails here</span></div>
+      <div style="flex:1;background:var(--blue);color:#fff;padding:14px 4px;">Month 3</div>
+      <div style="flex:1;background:var(--blue);color:#fff;padding:14px 4px;border-radius:0 6px 6px 0;">Month 4</div>
+    </div>
+    <div style="display:flex;gap:2px;margin-top:6px;font-size:11.5px;">
+      <div style="flex:1;"></div>
+      <div style="flex:2;background:var(--lightred);border:1px solid var(--red);border-radius:6px;padding:8px 6px;text-align:center;color:var(--red);font-weight:600;">
+        Billing Grace Period (up to 28 days) → Billing Retry (up to 60 days)
+      </div>
+      <div style="flex:1;"></div>
+    </div>
+    <div class="grid grid-3" style="margin-top:12px;">
+      <div style="font-size:12px;"><span style="display:inline-block;width:10px;height:10px;background:var(--blue);border-radius:2px;margin-right:6px;"></span>Days of paid service</div>
+      <div style="font-size:12px;"><span style="display:inline-block;width:10px;height:10px;background:var(--gray);border-radius:2px;margin-right:6px;"></span>Days of unpaid service</div>
+      <div style="font-size:12px;">Subscriber keeps billing cycle & renewal date throughout</div>
+    </div>
+  </div>
+
+  <table style="margin-top:14px;">
+    <tr><th>Subscriber State</th><th>Recommended Action</th><th>Distribution</th></tr>
+    <tr><td><b>Auto-renew: On, but low engagement</b></td><td>Communicate value · free period · offer up/downgrade tier</td><td>Email, push (outside app)</td></tr>
+    <tr><td><b>Auto-renew: Off</b></td><td>Show remaining days of service · personalized in-app discount (if push is off)</td><td>In-app</td></tr>
+    <tr><td><b>Churned</b></td><td>Win-back attempts · deepen discount as churn length increases</td><td>Email, push</td></tr>
+  </table>
+
+  <div class="grid grid-2" style="margin-top:14px;">
+    <div class="card">
+      <h3>Keeping Subscribers — Checklist</h3>
+      <ul>
+        <li>Send notifications</li>
+        <li>Provide support</li>
+        <li>Let people manage subscriptions themselves</li>
+        <li>Extend renewal date — up to <b>2x/year</b>, max <b>90 days</b></li>
+        <li>React to voluntary churn</li>
+        <li>Use Billing Grace Period</li>
+        <li>Price increase requires consent (offer expires if no response)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>📈 Retention Messaging — Proven Results</h3>
+      <ul>
+        <li>3 variants: <b>Message</b> / <b>Message + image</b> / <b>Message + offer</b></li>
+        <li>Average: <b>+1.4 pts save rate (+82%)</b></li>
+        <li>With promotional offers: <b>+5.5 pts save rate (+223%)</b></li>
+        <li>Real-time server-to-server retention messaging can layer in promo offers</li>
+      </ul>
+      <h3 style="margin-top:10px;">Analytics Tools</h3>
+      <span class="kpi-badge">Sales & Trends → Retention rate</span>
+      <span class="kpi-badge">Subscription report</span>
+      <span class="kpi-badge">Subscription events report</span>
+      <span class="kpi-badge">App Analytics → Retention benchmarks</span>
+    </div>
+  </div>
+</section>
+
+<!-- PPO & CPP -->
+<section id="ppo">
+  <h2>Product Page Optimization & Custom Product Pages <span class="tag">DISCOVERY</span></h2>
+
+  <table>
+    <tr><th></th><th>Custom Product Pages</th><th>Product Page Optimization</th></tr>
+    <tr><td><b>Intended Use</b></td><td>Highlight specific content and features</td><td>Testing and optimization</td></tr>
+    <tr><td><b>Intended Audience</b></td><td>Referrals</td><td>All on-store traffic</td></tr>
+    <tr><td><b>Time Frame</b></td><td>Ongoing</td><td>Up to 90 days per test</td></tr>
+    <tr><td><b>Assets</b></td><td>Screenshots, app previews, and promotional text</td><td>Icons, screenshots, and app previews</td></tr>
+    <tr><td><b>Metrics</b></td><td>Conversion rate, retention, and proceeds</td><td>Conversion rate, improvement, and confidence level</td></tr>
+  </table>
+
+  <table style="margin-top:14px;">
+    <tr><th>Product Page Optimization (PPO)</th><th>Custom Product Pages (CPP)</th></tr>
+    <tr><td>Tests App Icon, screenshots & previews across Browse/Search/Referral traffic</td><td>Tailors pages per referral source (unique URL each)</td></tr>
+    <tr><td>Up to <b>3 treatments</b> tested at once; no treatment gets more traffic than the original</td><td>Up to <b>35 pages</b> per app</td></tr>
+    <tr><td>App Icon changes = part of app binary → full App Review</td><td>Independent of app binary; localizable</td></tr>
+    <tr><td>Test one asset type at a time; can vary by localization</td><td>Customize preview, screenshots, promotional text per audience</td></tr>
+  </table>
+
+  <div class="grid grid-2" style="margin-top:14px;">
+    <div class="card">
+      <h3>Test Plan Must Define</h3>
+      <ul><li>Title & hypothesis</li><li># of treatments</li><li>Traffic distribution</li><li>Localization(s)</li><li>Duration</li></ul>
+    </div>
+    <div class="card">
+      <h3>Testing Themes</h3>
+      <ul><li>Brand / design</li><li>Seasonality</li><li>Screenshot order & orientation</li><li>Text callouts, asset type</li><li>New features vs. existing</li></ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <h3>🎯 CPP / Apple Ads Examples worth referencing with developers</h3>
+    <ul>
+      <li><b>Babbel</b> — screenshots adapt when someone searches "Learn Spanish"</li>
+      <li><b>Facetune</b> — images match search intent, e.g. "Hair Color Change"</li>
+      <li><b>TaskRabbit</b> — defends its most important keywords; uses <b>Maximize Conversions</b> bidding</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:14px;background:var(--navy);">
+    <h3 style="color:#fff;">🔍 App Store Discovery Tools</h3>
+    <div class="grid grid-4">
+      <div style="background:#1a2f4d;border-radius:10px;padding:12px;text-align:center;color:#fff;font-size:12px;">
+        <div style="font-size:20px;margin-bottom:6px;">📊</div>Peer group benchmarks<br><span class="note" style="color:#9fb3d1;">e.g. conversion rate percentile (25th/50th/75th)</span>
+      </div>
+      <div style="background:#1a2f4d;border-radius:10px;padding:12px;text-align:center;color:#fff;font-size:12px;">
+        <div style="font-size:20px;margin-bottom:6px;">🆚</div>Product page optimization<br><span class="note" style="color:#9fb3d1;">A/B testing icons & assets</span>
+      </div>
+      <div style="background:#1a2f4d;border-radius:10px;padding:12px;text-align:center;color:#fff;font-size:12px;">
+        <div style="font-size:20px;margin-bottom:6px;">🛒</div>Pre-orders<br><span class="note" style="color:#9fb3d1;">Drive anticipation before launch</span>
+      </div>
+      <div style="background:#1a2f4d;border-radius:10px;padding:12px;text-align:center;color:#fff;font-size:12px;">
+        <div style="font-size:20px;margin-bottom:6px;">📱</div>Custom product pages<br><span class="note" style="color:#9fb3d1;">Tailored per referral source</span>
+      </div>
+      <div style="background:#1a2f4d;border-radius:10px;padding:12px;text-align:center;color:#fff;font-size:12px;">
+        <div style="font-size:20px;margin-bottom:6px;">✏️</div>App Store editorial<br><span class="note" style="color:#9fb3d1;">Must-Have Apps, featured placements</span>
+      </div>
+      <div style="background:#1a2f4d;border-radius:10px;padding:12px;text-align:center;color:#fff;font-size:12px;">
+        <div style="font-size:20px;margin-bottom:6px;">🏆</div>In-app events<br><span class="note" style="color:#9fb3d1;">Timely, featured happenings inside the app</span>
+      </div>
+      <div style="background:#1a2f4d;border-radius:10px;padding:12px;text-align:center;color:#fff;font-size:12px;">
+        <div style="font-size:20px;margin-bottom:6px;">🔎</div>Search impressions<br><span class="note" style="color:#9fb3d1;">Visibility for relevant search terms</span>
+      </div>
+      <div style="background:#1a2f4d;border-radius:10px;padding:12px;text-align:center;color:#fff;font-size:12px;">
+        <div style="font-size:20px;margin-bottom:6px;">⚡</div>App Clips<br><span class="note" style="color:#9fb3d1;">Lightweight, instant experiences</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMISSIONS -->
+<section id="commissions">
+  <h2>Commissions, Reporting & Payments <span class="tag">RATES</span></h2>
+  <p class="subhead">The numbers developers always ask about first — keep this current, rates can change.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>App Store Commission — Apple In-App Purchase</h3>
+      <table>
+        <tr><th>Rate</th><th>Applies to</th></tr>
+        <tr><td><b>26%</b></td><td>Sales processed by Apple In-App Purchase</td></tr>
+        <tr><td><b>15%</b></td><td>Sales via IAP from App Store Small Business Program, Mini Apps Partner Program, or Video Partner Program participants; and auto-renewable subscriptions after their first year</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>App Store Commission — Alternative Payment Processing (in-app)</h3>
+      <table>
+        <tr><th>Rate</th><th>Applies to</th></tr>
+        <tr><td><b>20%</b></td><td>Sales processed via alternative payment processing within the app</td></tr>
+        <tr><td><b>10%</b></td><td>Same, for Small Business / Mini Apps Partner / Video Partner Program participants; and auto-renewable subs after first year</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <h3>Store Services Commission — Out-of-App Offers</h3>
+    <p class="note" style="margin-top:0;font-size:12.5px;">Applies when an app uses an out-of-app actionable link directing users to offers/promotions at a destination of their choice (website, alt. marketplace, or another app). Only sales within <b>7 days</b> of the link tap are subject to this commission.</p>
+    <table>
+      <tr><th>Rate</th><th>Applies to</th></tr>
+      <tr><td><b>15%</b></td><td>Out-of-app offers</td></tr>
+      <tr><td><b>10%</b></td><td>Out-of-app offers for relevant transactions from Small Business / Mini Apps Partner / Video Partner Program participants; and relevant auto-renewable subscriptions after their first year</td></tr>
+    </table>
+    <p class="note">Commission rates apply to the price paid by the customer. Tax calculation follows the Apple Developer Program License Agreement.</p>
+  </div>
+</section>
+
+<!-- PRICE INCREASE -->
+<section id="priceincrease">
+  <h2>Price Increase Flow <span class="tag">CUSTOMER COMMUNICATIONS</span></h2>
+  <p class="subhead">How Apple notifies subscribers of a price change, and how developers can apply it.</p>
+
+  <div class="card">
+    <h3>📅 Customer Communications Timeline</h3>
+    <div style="display:flex;align-items:center;gap:6px;margin:14px 0 4px;">
+      <div style="width:12px;height:12px;border-radius:50%;background:var(--blue);flex-shrink:0;"></div>
+      <div style="flex:1;height:2px;background:var(--line);"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:var(--blue);flex-shrink:0;"></div>
+      <div style="flex:1;height:2px;background:var(--line);"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:var(--blue);flex-shrink:0;"></div>
+    </div>
+    <div class="grid grid-3">
+      <div style="font-size:12.5px;"><b>Day 1:</b> Email and in-app dialog<br><span class="note">Sent on day 1</span></div>
+      <div style="font-size:12.5px;"><b>Day 23:</b> Push notification<br><span class="note">Sheet displayed once</span></div>
+      <div style="font-size:12.5px;"><b>Day 30:</b> Price increase takes effect<br><span class="note">Unless subscription canceled by user · sent only if sheet not viewed in 23 days</span></div>
+    </div>
+
+    <div class="grid grid-3" style="margin-top:16px;">
+      <div class="card" style="background:var(--bg);text-align:center;">
+        <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:10.5px;text-align:left;">
+          <b style="font-size:11px;">Subscription Price Increase</b>
+          <p style="margin:6px 0 4px;">The Coast <span style="color:var(--gray);">Basic (Monthly)</span></p>
+          <p style="margin:2px 0;">New $15.99 <span style="text-decoration:line-through;color:var(--gray);">Old $14.99</span></p>
+          <p style="margin:6px 0 2px;color:var(--gray);">Dear John,<br>Thank you for subscribing to The Coast. The developer is raising the price of this subscription from $14.99/month to $15.99/month, starting June 1, 2022, unless you cancel at least a day before.</p>
+          <p style="margin:4px 0 0;color:var(--gray);">Regards,<br>The App Store Team</p>
+        </div>
+        <p class="note" style="margin-top:8px;">📧 Email — sent on Day 1</p>
+      </div>
+      <div class="card" style="background:var(--bg);text-align:center;">
+        <div style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;font-size:11px;">
+          <div style="width:28px;height:28px;background:var(--lightblue);border-radius:8px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;">🅰️</div>
+          <b>Subscription Price Increase</b>
+          <p style="color:var(--gray);margin:6px 0;">The developer, The Coast, is raising the price of this subscription.</p>
+          <table style="font-size:10px;margin:6px 0;">
+            <tr><td>Plan</td><td>Basic (Monthly)</td></tr>
+            <tr><td>New Price</td><td><b>$15.99/month</b></td></tr>
+            <tr><td>Old Price</td><td>$14.99/month</td></tr>
+            <tr><td>Starting</td><td>June 1, 2022</td></tr>
+          </table>
+          <div style="background:var(--blue);color:#fff;border-radius:6px;padding:6px;margin-top:6px;">OK</div>
+        </div>
+        <p class="note" style="margin-top:8px;">📱 In-app dialog — sheet displayed once</p>
+      </div>
+      <div class="card" style="background:var(--bg);text-align:center;">
+        <div style="background:linear-gradient(135deg,#ff7a4d,#a83279);border-radius:16px;padding:14px 10px;font-size:10.5px;color:#fff;">
+          <p style="opacity:.85;margin:0 0 6px;">Tuesday, May 25 · 9:41</p>
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px;text-align:left;">
+            <b>APP STORE</b>
+            <p style="margin:4px 0 0;">Subscription Price Increase<br><span style="opacity:.85;">The Coast is raising its subscription price to $15.99/month starting Jun 1, 2022.</span></p>
+          </div>
+        </div>
+        <p class="note" style="margin-top:8px;">🔔 Push notification — sent only if sheet not viewed in 23 days</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <h3>💲 Increasing the Standard Price — Applying to Existing Subscribers</h3>
+    <p class="note" style="margin-top:0;">Example: a price move from $1.99/$2.99 up to $3.99 can be phased so existing subscribers are migrated on a schedule while new subscribers see the new price immediately.</p>
+    <table>
+      <tr><th>Price Point</th><th>Active Window (illustrative)</th></tr>
+      <tr><td><b>$3.99</b></td><td>Jan 1 → Apr 1 (new/standard price, full period)</td></tr>
+      <tr><td><b>$2.99</b></td><td>Jan 1 → Feb 1 (existing subscriber tier, phased out first)</td></tr>
+      <tr><td><b>$1.99</b></td><td>Jan 1 → Mar 1 (existing subscriber tier, phased out second)</td></tr>
+    </table>
+    <p class="note">Use this to stagger price increase consent requests across subscriber cohorts rather than all at once.</p>
+  </div>
+</section>
+
+<!-- EU PAYMENTS -->
+<section id="eu">
+  <h2>Payment Options in the EU <span class="tag">EFFECTIVE 1 OCT 2026</span></h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>What Changes</h3>
+      <ul>
+        <li>Apps can offer <b>alternative payment methods/processors</b> alongside IAP</li>
+        <li>Chosen payment setup must stay <b>consistent for 12 months</b></li>
+        <li>IAP must be presented <b>at the same time</b> as any alternative option shown in-app or via out-of-app actionable links</li>
+        <li>IAP must be displayed <b>at least as prominently</b> as any alternative</li>
+        <li>Different prices/benefits are allowed for alternative options</li>
+        <li>App Store product page <b>may not</b> mention alternative payment options</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Requirements for Developers</h3>
+      <ul>
+        <li><b>StoreKit External Purchases/Offers Entitlement</b> required</li>
+        <li>Must use <b>ExternalPurchaseCustomLink API</b> when offering alternative processing in-app or directing users out via actionable links</li>
+      </ul>
+      <div class="flag"><b>Reference:</b> Apple Developer Program License Agreement governs the terms.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ANALYTICS -->
+<section id="analytics">
+  <h2>Monetization Analytics & KPIs <span class="tag">WHERE TO LOOK</span></h2>
+  <table>
+    <tr><th>Tool</th><th>What it covers</th></tr>
+    <tr><td><b>App Analytics</b></td><td>Impressions, Product Page Views, Conversion Rate, Acquisition sources, Benchmarks</td></tr>
+    <tr><td><b>Sales & Trends</b></td><td>Retention rate, Subscription report, Subscription events report</td></tr>
+    <tr><td><b>Payments & Financial Reports</b></td><td>Financial reconciliation</td></tr>
+  </table>
+
+  <div class="grid grid-3" style="margin-top:14px;">
+    <div class="card">
+      <h3>Key Definitions</h3>
+      <ul>
+        <li><b>Impression</b>: every time the app icon is seen</li>
+        <li><b>Conversion Rate</b> = Total Downloads ÷ Unique Impressions</li>
+        <li><b>Total Downloads</b>: first-time + redownloads (not double-counted across a user's own devices)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Acquisition Sources</h3>
+      <ul><li>Territory</li><li>Source type: Browse / Search / App referrer / Web referrer</li></ul>
+    </div>
+    <div class="card">
+      <h3>Page Types</h3>
+      <ul><li>Product Page</li><li>Store sheet (SKProductViewController)</li><li>No page</li></ul>
+      <p class="note">Benchmarks: choose comparison against many or few similar apps.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <h3>📈 Analytics API — Full Reporting Categories</h3>
+    <p class="subhead" style="margin-top:0;">Everything available to pull for a developer, organized by domain — use this as your "what can I check?" index.</p>
+    <div class="grid grid-4">
+      <div>
+        <h3 style="font-size:13px;">App Store</h3>
+        <ul><li>Impressions</li><li>Impressions (Unique devices)</li><li>Conversion rate</li><li>Product page views</li><li>Product page views (Unique devices)</li><li>Updates</li></ul>
+      </div>
+      <div>
+        <h3 style="font-size:13px;">Downloads</h3>
+        <ul><li>First-time downloads</li><li>Redownloads</li><li>Total downloads</li></ul>
+      </div>
+      <div>
+        <h3 style="font-size:13px;">Sales</h3>
+        <ul><li>In-App Purchases</li><li>Proceeds</li><li>Sales</li><li>Paying users</li><li>Refunds</li><li>Refund rates</li><li>Download to paid</li></ul>
+      </div>
+      <div>
+        <h3 style="font-size:13px;">Usage</h3>
+        <ul><li>Installations</li><li>Sessions</li><li>Active devices</li><li>Active last 30 days</li><li>Crashes</li><li>Deletions</li></ul>
+      </div>
+    </div>
+    <div class="grid grid-4" style="margin-top:6px;">
+      <div>
+        <h3 style="font-size:13px;">Subscriptions</h3>
+        <ul><li>Plans</li><li>Offers</li><li>Churn</li><li>Billing issues</li><li>Monthly Recurring Revenue</li><li>Cohorts</li><li>Retention</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN -->
+<section id="design">
+  <h2>Design Principles <span class="tag">HIG ESSENTIALS</span></h2>
+  <div class="grid grid-3">
+    <div class="card"><h3>Agency</h3><ul><li>Let people work their own way, at their own speed</li><li>Offer forgiveness — allow undo</li><li>Avoid disaster</li></ul></div>
+    <div class="card"><h3>Responsibility</h3><ul><li>Act in people's interest</li><li>Privacy: ask only for necessary data, explain why</li><li>Ask "how could this be misused?"</li></ul></div>
+    <div class="card"><h3>Familiarity</h3><ul><li>Build on what people already know</li><li>Use metaphor</li><li>Be consistent — same look, same behavior</li></ul></div>
+    <div class="card"><h3>Flexibility</h3><ul><li>Let people personalize</li><li>Support unique usage patterns</li></ul></div>
+    <div class="card"><h3>Simplicity</h3><ul><li>Simple ≠ minimal</li><li>Frictionless & intuitive; respect time</li><li>Clear visual hierarchy</li></ul></div>
+    <div class="card"><h3>Craft & Delight</h3><ul><li>Care about every detail; maintain design over time</li><li>Make it satisfying and human</li></ul></div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <h3>💡 Designing for Subscription Success</h3>
+    <div class="grid grid-3">
+      <div><b>Effortless</b><ul><li>Be visible — not an ad, not a notification</li><li>Remove friction; watch click-to-conversion</li><li>Ask for personal info afterwards</li></ul></div>
+      <div><b>Transparent</b><ul><li>Clear name, price, value proposition</li><li>Strong CTA + Login/Restore options</li><li>Always offer multiple tiers + T&Cs</li></ul></div>
+      <div><b>Engaging</b><ul><li>Free trial / premium feature try-before-you-buy</li><li>Sample content (e.g. 10 free articles)</li><li><b>Family Sharing</b> → growth, engagement, lower churn, higher CLV</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEW GUIDELINES -->
+<section id="review">
+  <h2>App Review Guidelines Cheat Sheet <span class="tag">5 PILLARS</span></h2>
+  <p class="subhead">The full guidelines run 28 pages — here's what actually trips up large developers. Click to expand each pillar.</p>
+
+  <details open>
+    <summary><span class="pill safety">1 · SAFETY</span> Objectionable content, kids, physical harm, data security</summary>
+    <div class="body">
+      <ul>
+        <li>No defamatory/discriminatory content, realistic violence, or overtly sexual material</li>
+        <li><b>User-generated content</b> requires: content filter, report mechanism, block-abusive-users, published contact info</li>
+        <li><b>Kids Category</b>: no links out / purchases / distractions without a parental gate; no 3rd-party ads/analytics that collect identifiable data on kids</li>
+        <li><b>Medical/health apps</b>: must disclose accuracy methodology; can't claim to measure vitals from sensors alone; must remind users to consult a doctor</li>
+        <li>Must have accurate, reachable developer contact info</li>
+      </ul>
+      <div class="flag"><b>Flag for BD:</b> Escalating "user-generated content" complaints or health-claim apps early — these get greater scrutiny and slower reviews.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="pill performance">2 · PERFORMANCE</span> Completeness, metadata accuracy, hardware & software rules</summary>
+    <div class="body">
+      <ul>
+        <li>App must be final, functional, with working demo account/mode + backend live during review</li>
+        <li>Screenshots/previews must show real app in use — no misleading marketing</li>
+        <li>App name ≤ 30 characters; no keyword stuffing, no pricing/terms in metadata</li>
+        <li>Metadata (icons, screenshots) must fit 4+ rating even if app itself is rated higher</li>
+        <li>Apps must use <b>public APIs only</b>, run on current OS, be self-contained (no dynamic code execution/download)</li>
+        <li>No IPv6-only network failures; ads confined to main binary (not extensions/widgets/Kids apps)</li>
+      </ul>
+      <div class="flag"><b>Flag for BD:</b> "Whats New" notes must specifically describe new features/product changes — generic text only OK for bug fixes.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="pill business">3 · BUSINESS</span> In-App Purchase, subscriptions, alternative payment paths</summary>
+    <div class="body">
+      <ul>
+        <li><b>Must use IAP</b> for: unlocking features, subscriptions, in-game currency, premium content — no license keys, QR codes, crypto workarounds</li>
+        <li><b>Subscriptions</b>: min. 7-day period, ongoing value, must work across all user devices; upgrade/downgrade must be seamless</li>
+        <li><b>Exceptions allowed to skip IAP</b>: Reader apps (magazines/books/audio/video — link-out entitlement available), Multiplatform services, Enterprise services, Person-to-person real-time services, Goods/services consumed outside the app, Free standalone companion apps, Ad-campaign management apps</li>
+        <li><b>External Purchase Link Entitlement</b> / <b>Music Streaming Services Entitlement</b> — region-specific link-outs to developer's site, subject to strict conditions (US storefront has fewer restrictions)</li>
+        <li>No forcing users to rate/review/download other apps to unlock functionality</li>
+        <li>No manipulating rankings, reviews, or engaging paid/fake feedback</li>
+      </ul>
+      <div class="flag"><b>Flag for BD:</b> This is the section developers push back on most — know 3.1.3(a)–(g) exceptions cold when advising on monetization strategy.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="pill design">4 · DESIGN</span> Originality, minimum functionality, spam, extensions</summary>
+    <div class="body">
+      <ul>
+        <li>No copycat apps/icons/names — Apple treats impersonation as a Developer Code of Conduct violation</li>
+        <li>App must offer more than a repackaged website; no pure content-aggregator/marketing apps</li>
+        <li>No multiple Bundle IDs for the same app (e.g. one per city) — use IAP for variants instead</li>
+        <li>Certain categories (dating, flashlight, wallpaper, timers) need meaningfully different value to be accepted as new submissions</li>
+        <li>Keyboard/Safari extensions have specific functional requirements (e.g. must work offline, no launching other apps)</li>
+        <li>Login: if using a 3rd-party/social login, must also offer a privacy-respecting equivalent (unless exempt, e.g. own account system)</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="pill legal">5 · LEGAL</span> Privacy, IP, gambling, VPN/MDM</summary>
+    <div class="body">
+      <ul>
+        <li><b>Privacy policy required</b> everywhere (App Store Connect + in-app): what's collected, how, shared with whom, retention/deletion process</li>
+        <li>Consent required for data collection (even "anonymous"); no dark patterns forcing consent; data minimization — request only what's needed for core function</li>
+        <li>Account deletion must be offered if account creation is offered</li>
+        <li><b>Health/fitness data</b>: can't be used for ads/marketing; can't write false data into HealthKit; human-subject research needs consent + ethics board approval</li>
+        <li><b>Kids privacy</b>: COPPA/GDPR compliance; no 3rd-party analytics/ads for kids-primary apps</li>
+        <li>IP: only use content you own/license; no Apple product impersonation, no unauthorized Apple Music/emoji use</li>
+        <li><b>Gambling/lotteries/real-money gaming</b>: must be free, geo-restricted, fully licensed per territory</li>
+        <li><b>VPN/MDM apps</b>: NEVPNManager API only, org-enrolled developers only, no data resale, clear pre-use data disclosure</li>
+      </ul>
+      <div class="flag"><b>Flag for BD:</b> Privacy policy gaps and consent flow issues are the most common source of repeat rejections for larger developers.</div>
+    </div>
+  </details>
+
+  <div class="grid grid-3" style="margin-top:16px;">
+    <div class="card"><h3>After Submission — Timeline</h3><ul><li>Repeated same-guideline rejections → slower future reviews</li><li>Future release dates: up to 24h to appear on all storefronts</li></ul></div>
+    <div class="card"><h3>Expedite / Appeals</h3><ul><li>Expedited review: only for genuine critical timing issues</li><li>Appeals available if developer disagrees with outcome</li></ul></div>
+    <div class="card"><h3>Bug Fix Exception</h3><ul><li>Bug fixes on live apps won't be delayed over guideline violations — except legal/safety issues</li></ul></div>
+  </div>
+</section>
+
+<!-- DOCS -->
+<section id="docs">
+  <h2>Docs, Reading List & Escalation <span class="tag">QUICK LINKS</span></h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>📚 Core Docs to Bookmark</h3>
+      <div class="link-grid">
+        <a href="https://developer.apple.com/app-store/review/guidelines/">App Review Guidelines</a>
+        <a href="https://developer.apple.com/help/app-store-connect/">App Store Connect Help</a>
+        <a href="#">Auto-renewable Subscriptions</a>
+        <a href="#">Measuring App Performance</a>
+        <a href="#">In-App Purchases</a>
+        <a href="#">Product Page Optimization</a>
+        <a href="#">Custom Product Pages on the App Store</a>
+        <a href="#">In-App Events</a>
+        <a href="#">Payment Options on the App Store in the EU</a>
+        <a href="#">Web Distribution in the EU</a>
+        <a href="#">DPLA Attachment 14 / Operating an Alt. Marketplace in EU</a>
+        <a href="#">Apple Developer Program License Agreement</a>
+        <a href="#">App Tracking Transparency</a>
+        <a href="#">Design Principles (HIG)</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>🎥 WWDC26 Sessions Worth Rewatching</h3>
+      <div class="link-grid">
+        <a href="#">Explore Retention Messaging in App Store Connect</a>
+        <a href="#">What's New in In-App Purchase</a>
+        <a href="#">Make the Most of Product Page Optimization</a>
+        <a href="#">Get Started with App Discovery & Marketing</a>
+        <a href="#">Offer Subscriptions to Groups and Organizations</a>
+        <a href="#">Make the Most of Custom Product Pages</a>
+        <a href="#">Optimize Subscriptions for Success: Acquisition</a>
+        <a href="#">Get Started with Custom Offer Codes</a>
+        <a href="#">Maximize Monetization with App Store Connect Analytics</a>
+        <a href="#">Improve Subscriber Retention with App Store Features</a>
+        <a href="#">Principles of Great Design</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <h3>🚨 Escalation Paths</h3>
+    <p class="note" style="font-size:13px;">Full escalation contacts live in the source Docs page — link this card to your internal escalation doc once finalized. Suggested categories to track:</p>
+    <ul style="font-size:13px;">
+      <li>App Review rejection disputes → App Store Connect direct communication first, then Apple Ads/BD escalation channel</li>
+      <li>Retention/billing feature issues → App Store Connect Analytics Help</li>
+      <li>EU regulatory questions (payment options, alt. marketplaces) → Web Distribution / DPLA docs</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>Built from Ferdi's App Store Review notes, Docs reading list & App Review Guidelines · Last structured: Sept 2026 · Edit freely — it's just HTML/CSS.</footer>
+
+</body>
+</html>
